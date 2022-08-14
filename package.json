@@ -24,7 +24,7 @@
         "core-js-pure": "^3.24.1",
         "ejs": "^3.1.8",
         "google-map-react": "^2.1.10",
-        "moment": "^2.29.1",
+        "moment": "^2.29.4",
         "postinstall": "^0.7.4",
         "rc-slider": "^9.7.4",
         "react": "^18.1.0",
