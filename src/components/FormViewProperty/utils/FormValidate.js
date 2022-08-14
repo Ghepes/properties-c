@@ -8,7 +8,7 @@ export const formValidate = async (data) => {
         errors.title = "El campo titulo es obligatorio";
     }
     if (!data.offer && data.offer === "") {
-        errors.offer = "El campo tipo de oferta es obligatorio";
+        errors.offer = "is required";
     }
     if (!data.propertyType && data.propertyType === "") {
         errors.propertyType = "El campo tipo de propiedad es obligatorio";

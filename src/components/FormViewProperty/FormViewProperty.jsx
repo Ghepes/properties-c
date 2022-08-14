@@ -52,7 +52,7 @@ const FormviewProperty = () => {
             <div className="flex flex-col md:flex-row">
 
                 <div className="flex-grow w-full mt-10 space-y-6 md:mt-0 md:pl-16">
-                    <h3>Información del inmueble</h3>
+                    <h3>Hello liberty, choose your destination</h3>
                     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
                         <div className="w-full">
                             <Label>Reference </Label>
@@ -85,14 +85,14 @@ const FormviewProperty = () => {
                     </div>
                     <div className="grid grid-cols-1 gap-4 lg:grid-cols-4">
                         <div className="w-full">
-                            <Label>Tipo de oferta </Label>
+                            <Label>Type </Label>
                             <Select
                                 className="mt-1.5"
                                 value={property.offerId}
                                 name="offer"
                                 readOnly
                             >
-                                <option value="">Seleccione una opción</option>
+                                <option value="">Select</option>
                                 <option value="1">Venta</option>
                                 <option value="2">Arriendo</option>
                             </Select>
@@ -166,7 +166,7 @@ const FormviewProperty = () => {
                                 readOnly
                             >
                                 <option hidden value="">
-                                    Seleccione un departamento
+                                    Select a department
                                 </option>
                                 {departaments &&
                                     departaments.map((departament) => (
@@ -274,7 +274,7 @@ const FormviewProperty = () => {
                                 readOnly
                             >
                                 <option hidden value="">
-                                    ninguno
+                                    none
                                 </option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
