@@ -5,11 +5,11 @@ import HeroSearchForm, {
 } from "components/HeroSearchForm/HeroSearchForm";
 
 export interface SectionHeroArchivePageProps {
-    className?: string;
-    listingType?: ReactNode;
-    currentPage: "Venta" | "Arriendo";
-    currentTab: SearchTab;
-    rightImage?: string;
+  className?: string;
+  listingType?: ReactNode;
+  currentPage: "Stays" | "Experiences" | "Cars" | "Flights";
+  currentTab: SearchTab;
+  rightImage?: string;
 }
 
 const SectionHeroArchivePage: FC<SectionHeroArchivePageProps> = ({
@@ -25,7 +25,7 @@ const SectionHeroArchivePage: FC<SectionHeroArchivePageProps> = ({
       data-nc-id="SectionHeroArchivePage"
     >
       <div className="flex flex-col lg:flex-row lg:items-center">
-        <div className="flex flex-col items-start flex-shrink-0 space-y-6 lg:w-1/2 lg:space-y-10 pb-14 lg:pb-64 xl:pb-80 xl:pr-14 lg:mr-10 xl:mr-0">
+        <div className="flex-shrink-0 lg:w-1/2 flex flex-col items-start space-y-6 lg:space-y-10 pb-14 lg:pb-64 xl:pb-80 xl:pr-14 lg:mr-10 xl:mr-0">
           <h2 className="font-medium text-4xl md:text-5xl xl:text-7xl leading-[110%]">
             Tokyo, Jappan
           </h2>
@@ -48,8 +48,8 @@ const SectionHeroArchivePage: FC<SectionHeroArchivePageProps> = ({
         </div>
       </div>
 
-      <div className="flow-root w-full">
-        <div className="z-10 w-full lg:-mt-40 xl:-mt-56">
+      <div className="hidden lg:flow-root w-full">
+        <div className="z-10 lg:-mt-40 xl:-mt-56 w-full">
           <HeroSearchForm currentPage={currentPage} currentTab={currentTab} />
         </div>
       </div>

@@ -1,95 +1,62 @@
-import React, { FC, useState } from "react";
+import React, { FC, useContext } from "react";
 import ButtonCircle from "shared/Button/ButtonCircle";
-import rightImg from "./PR_Monochromatic.svg";
+import rightImg from "images/SVG-subcribe2.png";
 import NcImage from "shared/NcImage/NcImage";
 import Badge from "shared/Badge/Badge";
 import Input from "shared/Input/Input";
-import clientAxios from "config/axios";
-import Swal from "sweetalert2";
-import SpinnerButton from "components/SpinnerButton/SpinnerButton";
-
+import AuthContext from "context/AuthContext";
 export interface SectionSubscribe2Props {
-    className?: string;
+  className?: string;
 }
 
-const INITIAL_STATE_EMAIL = {
-    email: "",
-    value: "",
-};
 const SectionSubscribe2: FC<SectionSubscribe2Props> = ({ className = "" }) => {
-    const [email, setEmail] = useState<{ [key: string]: string }>(
-        INITIAL_STATE_EMAIL
-    );
-  const [error, setError] = useState<string | undefined | false>(false);
-  const [loading, setLoading] = useState<boolean>(false);
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail({
-            email: e.target.value,
-        });
-    };
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-      try {
-          setLoading(true);
-            await clientAxios.post("/suscriptions", email);
-            setError(false);
-            Swal.fire(
-                "Te has suscrito!",
-                "Tu suscipcion se ha procesado con exito. Ahora disfrutaras de las mejores actualizaciones",
-                "success"
-            );
-        setEmail(INITIAL_STATE_EMAIL);
-        setLoading(false);
-      } catch (error: any) {
-        setLoading(false);
-            setError(error.response.data);
-        }
-    };
-
-    return (
-        <div
-            className={`nc-SectionSubscribe2 relative flex flex-col lg:flex-row lg:items-center ${className}`}
-            data-nc-id="SectionSubscribe2"
-        >
-            <div className="flex-shrink-0 mb-10 lg:mb-0 lg:mr-10 lg:w-2/5">
-                <h2 className="text-4xl font-semibold">
-                    Recibe actualizaciones 🎉
-                </h2>
-                <span className="block mt-5 text-neutral-500 dark:text-neutral-400">
-                    Puedes estar tranquilo, nostros te enviaremos las ultimas
-                    actualziaciones y notificaciones del inmueble que estas
-                    buscando.
-                </span>
-                <form
-                    className="relative max-w-sm mt-10"
-                    onSubmit={handleSubmit}
-                >
-                    <Input
-                        required
-                        aria-required
-                        placeholder="Ingresa tu Email"
-                        type="email"
-                        autoComplete="email"
-                        name="email"
-                        onChange={handleChange}
-                        value={email.email}
-                    />
-                    <ButtonCircle
-                        type="submit"
-                        className="absolute transform -translate-y-1/2 top-1/2 right-1"
-                    >
-                        {loading?<SpinnerButton/>: <i className="text-xl las la-arrow-right"></i>}
-                    </ButtonCircle>
-                </form>
-                <p className="text-red-500 text-xs py-2">{error}</p>
-            </div>
-            <div className="flex-grow">
-                <NcImage src={rightImg} />
-            </div>
-        </div>
-    );
+  const auth: any = useContext(AuthContext);
+  return (
+    <div
+      className={`nc-SectionSubscribe2 relative flex flex-col lg:flex-row lg:items-center ${className}`}
+      data-nc-id="SectionSubscribe2"
+    >
+      <div className="flex-shrink-0 mb-10 lg:mb-0 lg:mr-10 lg:w-2/5">
+        <h2 className="font-semibold text-4xl">
+          {auth.site_data.Join_our_newsletter} 🎉
+        </h2>
+        <span className="block mt-5 text-neutral-500 dark:text-neutral-400">
+          {auth.site_data.Join_our_newsletter_desc}
+        </span>
+        <ul className="space-y-4 mt-10">
+          <li className="flex items-center space-x-4">
+            <Badge name="01" />
+            <span className="font-medium text-neutral-700 dark:text-neutral-300">
+              {auth.site_data.Join_our_newsletter_1}
+            </span>
+          </li>
+          <li className="flex items-center space-x-4">
+            <Badge color="red" name="02" />
+            <span className="font-medium text-neutral-700 dark:text-neutral-300">
+              {auth.site_data.Join_our_newsletter_1}
+            </span>
+          </li>
+        </ul>
+        <form className="mt-10 relative max-w-sm">
+          <Input
+            required
+            aria-required
+            placeholder={auth.site_data.Enter_your_email}
+            type="email"
+          />
+          <ButtonCircle
+            type="submit"
+            className="absolute transform top-1/2 -translate-y-1/2 right-1"
+          >
+            <i className="las la-arrow-right text-xl"></i>
+          </ButtonCircle>
+        </form>
+      </div>
+      <div className="flex-grow">
+        <NcImage src={rightImg} />
+      </div>
+    </div>
+  );
 };
 
 export default SectionSubscribe2;

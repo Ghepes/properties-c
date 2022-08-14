@@ -8,7 +8,11 @@ import StartRating from "components/StartRating/StartRating";
 import GoogleMapReact from "google-map-react";
 import useWindowSize from "hooks/useWindowResize";
 import moment from "moment";
-import { DayPickerRangeController, FocusedInputShape } from "react-dates";
+import {
+  DayPickerRangeController,
+  FocusedInputShape,
+  isInclusivelyAfterDay,
+} from "react-dates";
 import Avatar from "shared/Avatar/Avatar";
 import Badge from "shared/Badge/Badge";
 import ButtonCircle from "shared/Button/ButtonCircle";
@@ -31,6 +35,7 @@ import carUtilities7 from "images/carUtilities/7.png";
 import carUtilities8 from "images/carUtilities/8.png";
 import RentalCarDatesRangeInput from "components/HeroSearchForm/RentalCarDatesRangeInput";
 import { TimeRage } from "components/HeroSearchForm/RentalCarSearchForm";
+import MobileFooterSticky from "./MobileFooterSticky";
 
 export interface ListingCarDetailPageProps {
   className?: string;
@@ -117,13 +122,13 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
     return (
       <div className="listingSection__wrap !space-y-6">
         {/* 1 */}
-        <div className="flex items-center justify-between">
+        <div className="flex justify-between items-center">
           <Badge color="pink" name="BMW car" />
           <LikeSaveBtns />
         </div>
 
         {/* 2 */}
-        <h2 className="text-2xl font-semibold sm:text-3xl lg:text-4xl">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold">
           BMW 3 Series Sedan
         </h2>
 
@@ -142,7 +147,7 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
           <Avatar hasChecked sizeClass="h-10 w-10" radius="rounded-full" />
           <span className="ml-2.5 text-neutral-500 dark:text-neutral-400">
             Car owner{" "}
-            <span className="font-medium text-neutral-900 dark:text-neutral-200">
+            <span className="text-neutral-900 dark:text-neutral-200 font-medium">
               Kevin Francis
             </span>
           </span>
@@ -152,17 +157,17 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
         <div className="w-full border-b border-neutral-100 dark:border-neutral-700" />
 
         {/* 6 */}
-        <div className="flex items-center justify-between space-x-8 text-sm xl:justify-start xl:space-x-12 text-neutral-700 dark:text-neutral-300">
-          <div className="flex flex-col items-center space-y-3 text-center sm:flex-row sm:space-y-0 sm:text-left sm:space-x-3 ">
-            <i className="text-2xl las la-user-friends"></i>
+        <div className="flex items-center justify-between xl:justify-start space-x-8 xl:space-x-12 text-sm text-neutral-700 dark:text-neutral-300">
+          <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 text-center sm:text-left sm:space-x-3 ">
+            <i className="las la-user-friends text-2xl"></i>
             <span className="">4 seats</span>
           </div>
-          <div className="flex flex-col items-center space-y-3 text-center sm:flex-row sm:space-y-0 sm:text-left sm:space-x-3 ">
-            <i className="text-2xl las la-dharmachakra"></i>
+          <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 text-center sm:text-left sm:space-x-3 ">
+            <i className="las la-dharmachakra text-2xl"></i>
             <span className=""> Auto gearbox</span>
           </div>
-          <div className="flex flex-col items-center space-y-3 text-center sm:flex-row sm:space-y-0 sm:text-left sm:space-x-3 ">
-            <i className="text-2xl las la-suitcase"></i>
+          <div className="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 text-center sm:text-left sm:space-x-3 ">
+            <i className="las la-suitcase text-2xl"></i>
             <span className=""> 2 bags</span>
           </div>
         </div>
@@ -182,13 +187,13 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
             Questions are at the heart of making things great.
           </span>
         </div>
-        <div className="border-b w-14 border-neutral-200 dark:border-neutral-700"></div>
+        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
         {/* 6 */}
-        <div className="grid grid-cols-1 text-sm lg:grid-cols-2 gap-y-6 gap-x-10 text-neutral-700 dark:text-neutral-300 ">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-10 text-sm text-neutral-700 dark:text-neutral-300 ">
           {/* TIEN ICH 1 */}
           {Amenities_demos.map((item, index) => (
             <div key={index} className="flex items-center space-x-4 ">
-              <div className="flex-shrink-0 w-10">
+              <div className="w-10 flex-shrink-0">
                 <img src={item.icon} alt="" />
               </div>
               <span>{item.name}</span>
@@ -203,7 +208,7 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
     return (
       <div className="listingSection__wrap">
         <h2 className="text-2xl font-semibold">Car descriptions</h2>
-        <div className="border-b w-14 border-neutral-200 dark:border-neutral-700"></div>
+        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
         <div className="text-neutral-6000 dark:text-neutral-300">
           <p>
             Until the all-new TUCSON hits the dealer showrooms you can check it
@@ -230,14 +235,14 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
             Included in the price
           </span>
         </div>
-        <div className="border-b w-14 border-neutral-200 dark:border-neutral-700"></div>
+        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
         {/* 6 */}
-        <div className="grid grid-cols-1 gap-6 text-sm lg:grid-cols-2 text-neutral-700 dark:text-neutral-300 ">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 text-sm text-neutral-700 dark:text-neutral-300 ">
           {includes_demo
             .filter((_, i) => i < 12)
             .map((item) => (
               <div key={item.name} className="flex items-center space-x-3">
-                <i className="text-2xl las la-check-circle"></i>
+                <i className="las la-check-circle text-2xl"></i>
                 <span>{item.name}</span>
               </div>
             ))}
@@ -248,7 +253,7 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
 
   const renderSectionCheckIndate = () => {
     return (
-      <div className="overflow-hidden listingSection__wrap">
+      <div className="listingSection__wrap overflow-hidden">
         {/* HEADING */}
         <div>
           <h2 className="text-2xl font-semibold">Availability</h2>
@@ -256,9 +261,9 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
             Prices may increase on weekends or holidays
           </span>
         </div>
-        <div className="border-b w-14 border-neutral-200 dark:border-neutral-700"></div>
+        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
         {/* CONTENT */}
-        <div className="flow-root listingSection__wrap__DayPickerRangeController">
+        <div className="listingSection__wrap__DayPickerRangeController flow-root">
           <div className="-mx-4 sm:mx-auto xl:mx-[-22px]">
             <DayPickerRangeController
               startDate={dateRangeValue.startDate}
@@ -272,6 +277,7 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
               numberOfMonths={windowSize.width < 1280 ? 1 : 2}
               daySize={getDaySize()}
               hideKeyboardShortcutsPanel
+              isOutsideRange={(day) => !isInclusivelyAfterDay(day, moment())}
             />
           </div>
         </div>
@@ -298,7 +304,7 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
               rounded="rounded-xl"
               id="endTime"
               type="time"
-              onChange={() => {}}
+              onChange={(e) => console.log(e)}
             />
           </div>
         </div>
@@ -311,7 +317,7 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
       <div className="listingSection__wrap">
         {/* HEADING */}
         <h2 className="text-2xl font-semibold">Car Owner</h2>
-        <div className="border-b w-14 border-neutral-200 dark:border-neutral-700"></div>
+        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
 
         {/* host */}
         <div className="flex items-center space-x-4">
@@ -345,7 +351,7 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
           <div className="flex items-center space-x-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6"
+              className="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -362,7 +368,7 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
           <div className="flex items-center space-x-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6"
+              className="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -379,7 +385,7 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
           <div className="flex items-center space-x-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6"
+              className="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -397,7 +403,7 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
         </div>
 
         {/* == */}
-        <div className="border-b w-14 border-neutral-200 dark:border-neutral-700"></div>
+        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
         <div>
           <ButtonSecondary href="##">See host profile</ButtonSecondary>
         </div>
@@ -410,7 +416,7 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
       <div className="listingSection__wrap">
         {/* HEADING */}
         <h2 className="text-2xl font-semibold">Reviews (23 reviews)</h2>
-        <div className="border-b w-14 border-neutral-200 dark:border-neutral-700"></div>
+        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
 
         {/* Content */}
         <div className="space-y-5">
@@ -423,7 +429,7 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
               placeholder="Share your thoughts ..."
             />
             <ButtonCircle
-              className="absolute transform -translate-y-1/2 right-2 top-1/2"
+              className="absolute right-2 top-1/2 transform -translate-y-1/2"
               size=" w-12 h-12 "
             >
               <ArrowRightIcon className="w-5 h-5" />
@@ -455,11 +461,11 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
             San Diego, CA, United States of America (SAN-San Diego Intl.)
           </span>
         </div>
-        <div className="border-b w-14 border-neutral-200 dark:border-neutral-700" />
+        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700" />
 
         {/* MAP */}
         <div className="aspect-w-5 aspect-h-5 sm:aspect-h-3">
-          <div className="overflow-hidden rounded-xl">
+          <div className="rounded-xl overflow-hidden">
             <GoogleMapReact
               bootstrapURLKeys={{
                 key: "AIzaSyAGVJfZMAKYfZ71nzL_v5i3LjTTWnCYwTY",
@@ -484,7 +490,7 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
       <div className="listingSection__wrap">
         {/* HEADING */}
         <h2 className="text-2xl font-semibold">Things to know</h2>
-        <div className="border-b w-14 border-neutral-200 dark:border-neutral-700" />
+        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700" />
 
         {/* CONTENT */}
         <div>
@@ -494,7 +500,7 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
             Reserve now and pay at pick-up.
           </span>
         </div>
-        <div className="border-b w-14 border-neutral-200 dark:border-neutral-700" />
+        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700" />
 
         {/* CONTENT */}
         <div>
@@ -512,73 +518,74 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
 
   const renderSidebarPrice = () => {
     return (
-        <div className="shadow-xl listingSectionSidebar__wrap">
-            {/* PRICE */}
-            <div className="flex justify-between">
-                <span className="text-3xl font-semibold">
-                    $19
-                    <span className="ml-1 text-base font-normal text-neutral-500 dark:text-neutral-400">
-                        /day
-                    </span>
-                </span>
-                <StartRating />
-            </div>
-
-            {/* FORM */}
-            <form className="flex border border-neutral-200 dark:border-neutral-700 rounded-3xl ">
-                <RentalCarDatesRangeInput
-                    defaultDateValue={dateRangeValue}
-                    defaultTimeValue={timeRangeValue}
-                    numberOfMonths={1}
-                    fieldClassName="p-5"
-                    wrapFieldClassName="flex flex-col w-full flex-shrink-0 relative divide-y divide-neutral-200 dark:divide-neutral-700"
-                    className="RentalCarDetailPageDatesRangeInput"
-                    onChange={(data) => {
-                        setDateRangeValue(data.stateDate);
-                        setTimeRangeValue(data.stateTimeRage);
-                    }}
-                    anchorDirection={windowSize.width > 1400 ? "left" : "right"}
-                />
-            </form>
-
-            {/* SUM */}
-            <div className="flex flex-col space-y-4 ">
-                <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
-                    <span>$19 x 3 day</span>
-                    <span>$57</span>
-                </div>
-
-                <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
-                <div className="flex justify-between font-semibold">
-                    <span>Total</span>
-                    <span>$199</span>
-                </div>
-            </div>
-
-            {/* SUBMIT */}
-            <ButtonPrimary>Quiero que me contacten</ButtonPrimary>
+      <div className="listingSectionSidebar__wrap shadow-xl">
+        {/* PRICE */}
+        <div className="flex justify-between">
+          <span className="text-3xl font-semibold">
+            $19
+            <span className="ml-1 text-base font-normal text-neutral-500 dark:text-neutral-400">
+              /day
+            </span>
+          </span>
+          <StartRating />
         </div>
+
+        {/* FORM */}
+        <form className="flex border  border-neutral-200 dark:border-neutral-700 rounded-3xl ">
+          <RentalCarDatesRangeInput
+            defaultDateValue={dateRangeValue}
+            defaultTimeValue={timeRangeValue}
+            numberOfMonths={2}
+            fieldClassName="p-3"
+            wrapFieldClassName="flex flex-col w-full flex-shrink-0 relative divide-y divide-neutral-200 dark:divide-neutral-700"
+            className="RentalCarDetailPageDatesRangeInput flex-1"
+            onChange={(data) => {
+              setDateRangeValue(data.stateDate);
+              setTimeRangeValue(data.stateTimeRage);
+            }}
+            anchorDirection={"right"}
+            hasButtonSubmit={false}
+          />
+        </form>
+
+        {/* SUM */}
+        <div className="flex flex-col space-y-4 ">
+          <div className="flex justify-between text-neutral-6000 dark:text-neutral-300">
+            <span>$19 x 3 day</span>
+            <span>$57</span>
+          </div>
+
+          <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
+          <div className="flex justify-between font-semibold">
+            <span>Total</span>
+            <span>$199</span>
+          </div>
+        </div>
+
+        {/* SUBMIT */}
+        <ButtonPrimary href={"/checkout"}>Reserve</ButtonPrimary>
+      </div>
     );
   };
 
   const renderSidebarDetail = () => {
     return (
       <div className="listingSection__wrap lg:shadow-xl">
-        <span className="block text-2xl font-semibold">
+        <span className="text-2xl font-semibold block">
           Pick up and drop off
         </span>
-        <div className="flex mt-8">
-          <div className="flex flex-col items-center flex-shrink-0 py-2">
-            <span className="block w-6 h-6 border rounded-full border-neutral-400"></span>
-            <span className="flex-grow block my-1 border-l border-dashed border-neutral-400"></span>
-            <span className="block w-6 h-6 border rounded-full border-neutral-400"></span>
+        <div className="mt-8 flex">
+          <div className="flex-shrink-0 flex flex-col items-center py-2">
+            <span className="block w-6 h-6 rounded-full border border-neutral-400"></span>
+            <span className="block flex-grow border-l border-neutral-400 border-dashed my-1"></span>
+            <span className="block w-6 h-6 rounded-full border border-neutral-400"></span>
           </div>
-          <div className="ml-4 text-sm space-y-14">
+          <div className="ml-4 space-y-14 text-sm">
             <div className="flex flex-col space-y-2">
               <span className=" text-neutral-500 dark:text-neutral-400">
                 Monday, August 12 · 10:00
               </span>
-              <span className="font-semibold ">
+              <span className=" font-semibold">
                 Saint Petersburg City Center
               </span>
             </div>
@@ -586,7 +593,7 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
               <span className=" text-neutral-500 dark:text-neutral-400">
                 Monday, August 16 · 10:00
               </span>
-              <span className="font-semibold ">
+              <span className=" font-semibold">
                 Saint Petersburg City Center
               </span>
             </div>
@@ -598,15 +605,15 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
 
   return (
     <div
-      className={`nc-ListingCarDetailPage  ${className}`}
+      className={`ListingDetailPage nc-ListingCarDetailPage ${className}`}
       data-nc-id="ListingCarDetailPage"
     >
       {/* SINGLE HEADER */}
       <>
-        <header className="container rounded-md 2xl:px-14 sm:rounded-xl">
+        <header className="container 2xl:px-14 rounded-md sm:rounded-xl">
           <div className="relative grid grid-cols-4 gap-1 sm:gap-2">
             <div
-              className="relative col-span-2 row-span-2 overflow-hidden rounded-md cursor-pointer sm:rounded-xl"
+              className="col-span-2 row-span-2 relative rounded-md sm:rounded-xl overflow-hidden cursor-pointer"
               onClick={() => handleOpenModal(0)}
             >
               <NcImage
@@ -614,12 +621,12 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
                 className="object-cover w-full h-full rounded-md sm:rounded-xl"
                 src={PHOTOS[0]}
               />
-              <div className="absolute inset-0 transition-opacity opacity-0 bg-neutral-900 bg-opacity-20 hover:opacity-100"></div>
+              <div className="absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity"></div>
             </div>
 
             {/*  */}
             <div
-              className="relative col-span-1 row-span-2 overflow-hidden rounded-md cursor-pointer sm:rounded-xl"
+              className="col-span-1 row-span-2 relative rounded-md sm:rounded-xl overflow-hidden cursor-pointer"
               onClick={() => handleOpenModal(1)}
             >
               <NcImage
@@ -627,7 +634,7 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
                 className="object-cover w-full h-full rounded-md sm:rounded-xl"
                 src={PHOTOS[1]}
               />
-              <div className="absolute inset-0 transition-opacity opacity-0 bg-neutral-900 bg-opacity-20 hover:opacity-100"></div>
+              <div className="absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity"></div>
             </div>
 
             {/*  */}
@@ -646,19 +653,19 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
 
                 {/* OVERLAY */}
                 <div
-                  className="absolute inset-0 transition-opacity opacity-0 cursor-pointer bg-neutral-900 bg-opacity-20 hover:opacity-100"
+                  className="absolute inset-0 bg-neutral-900 bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity cursor-pointer"
                   onClick={() => handleOpenModal(index + 2)}
                 />
               </div>
             ))}
 
             <div
-              className="absolute z-10 hidden px-4 py-2 cursor-pointer md:flex md:items-center md:justify-center left-3 bottom-3 rounded-xl bg-neutral-100 text-neutral-500 hover:bg-neutral-200"
+              className="absolute hidden md:flex md:items-center md:justify-center left-3 bottom-3 px-4 py-2 rounded-xl bg-neutral-100 text-neutral-500 cursor-pointer hover:bg-neutral-200 z-10"
               onClick={() => handleOpenModal(0)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-5 h-5"
+                className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -670,7 +677,7 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
                   d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
                 />
               </svg>
-              <span className="ml-2 text-sm font-medium text-neutral-800">
+              <span className="ml-2 text-neutral-800 text-sm font-medium">
                 Show all photos
               </span>
             </div>
@@ -687,9 +694,9 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
       </>
 
       {/* MAIn */}
-      <main className="container relative z-10 flex flex-col mt-11 lg:flex-row ">
+      <main className="container relative z-10 mt-11 flex flex-col lg:flex-row ">
         {/* CONTENT */}
-        <div className="w-full space-y-8 lg:w-3/5 xl:w-2/3 lg:pr-10 lg:space-y-10">
+        <div className="w-full lg:w-3/5 xl:w-2/3 space-y-8 lg:pr-10 lg:space-y-10">
           {renderSection1()}
           <div className="block lg:hidden">{renderSidebarDetail()}</div>
           {renderSectionTienIch()}
@@ -703,25 +710,16 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
         </div>
 
         {/* SIDEBAR */}
-        <div className="flex-grow block mt-14 lg:mt-0">
+        <div className="block flex-grow mt-14 lg:mt-0">
           {renderSidebarDetail()}
-          <div className="sticky mt-10 top-24">{renderSidebarPrice()}</div>
+          <div className="hidden lg:block mt-10 sticky top-28">
+            {renderSidebarPrice()}
+          </div>
         </div>
       </main>
 
       {/* STICKY FOOTER MOBILE */}
-      <div className="fixed inset-x-0 bottom-0 z-20 block py-4 bg-white border-t lg:hidden text-neutral-900 border-neutral-200">
-        <div className="container flex items-center justify-between">
-          <span className="text-2xl font-semibold">
-            $311
-            <span className="ml-1 text-base font-normal text-neutral-500 dark:text-neutral-400">
-              /day
-            </span>
-          </span>
-
-          <ButtonPrimary href="##">Reserve</ButtonPrimary>
-        </div>
-      </div>
+      <MobileFooterSticky />
 
       {/* OTHER SECTION */}
       <div className="container py-24 lg:py-32">

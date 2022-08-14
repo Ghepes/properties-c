@@ -14,49 +14,49 @@ export interface ListingStayPageProps {
 
 const ListingStayPage: FC<ListingStayPageProps> = ({ className = "" }) => {
   return (
-      <div
-          className={`nc-ListingStayPage relative overflow-hidden ${className}`}
-          data-nc-id="ListingStayPage"
-      >
-          <Helmet>
-              <title>Properties</title>
-          </Helmet>
-          <BgGlassmorphism />
+    <div
+      className={`nc-ListingStayPage relative overflow-hidden ${className}`}
+      data-nc-id="ListingStayPage"
+    >
+      <Helmet>
+        <title>Chisfis || Booking React Template</title>
+      </Helmet>
+      <BgGlassmorphism />
 
-          <div className="container relative overflow-hidden">
-              {/* SECTION HERO */}
-              <SectionHeroArchivePage
-                  currentPage="Venta"
-                  currentTab="Venta"
-                  className="pt-10 pb-24 lg:pb-32 lg:pt-16 "
-              />
+      <div className="container relative overflow-hidden">
+        {/* SECTION HERO */}
+        <SectionHeroArchivePage
+          currentPage="Stays"
+          currentTab="Stays"
+          className="pt-10 pb-24 lg:pb-28 lg:pt-16 "
+        />
 
-              {/* SECTION */}
-              <SectionGridFilterCard className="pb-24 lg:pb-32" />
+        {/* SECTION */}
+        <SectionGridFilterCard className="pb-24 lg:pb-28" />
 
-              {/* SECTION 1 */}
-              <div className="relative py-16">
-                  <BackgroundSection />
-                  <SectionSliderNewCategories
-                      heading="Explore by types of stays"
-                      subHeading="Explore houses based on 10 types of stays"
-                      categoryCardType="card5"
-                      itemPerRow={5}
-                      sliderStyle="style2"
-                      uniqueClassName="ListingStayMapPage"
-                  />
-              </div>
+        {/* SECTION 1 */}
+        <div className="relative py-16">
+          <BackgroundSection />
+          <SectionSliderNewCategories
+            heading="Explore by types of stays"
+            subHeading="Explore houses based on 10 types of stays"
+            categoryCardType="card5"
+            itemPerRow={5}
+            sliderStyle="style2"
+            uniqueClassName="ListingStayMapPage"
+          />
+        </div>
 
-              {/* SECTION */}
-              <SectionSubscribe2 className="py-24 lg:py-32" />
+        {/* SECTION */}
+        <SectionSubscribe2 className="py-24 lg:py-28" />
 
-              {/* SECTION */}
-              <div className="relative py-16 mb-24 lg:mb-32">
-                  <BackgroundSection className="bg-orange-50 dark:bg-black dark:bg-opacity-20 " />
-                  <SectionGridAuthorBox />
-              </div>
-          </div>
+        {/* SECTION */}
+        <div className="relative py-16 mb-24 lg:mb-28">
+          <BackgroundSection className="bg-orange-50 dark:bg-black dark:bg-opacity-20 " />
+          <SectionGridAuthorBox />
+        </div>
       </div>
+    </div>
   );
 };
 

@@ -1,5 +1,5 @@
 
-> core-js@2.6.12 postinstall \node_modules\core-js
+> core-js@2.6.12 postinstall D:\A_TUAN\REACT_JS\CHISFIS\Chisfis\node_modules\babel-runtime\node_modules\core-js
 > node -e "try{require('./postinstall')}catch(e){}"
 
 [96mThank you for using core-js ([94m https://github.com/zloirock/core-js [96m) for polyfilling JavaScript standard library![0m
@@ -11,15 +11,15 @@
 [96mAlso, the author of core-js ([94m https://github.com/zloirock [96m) is looking for a good job -)[0m
 
 
-> core-js@3.15.2 postinstall \node_modules\core-js
+> core-js@3.15.2 postinstall D:\A_TUAN\REACT_JS\CHISFIS\Chisfis\node_modules\core-js
 > node -e "try{require('./postinstall')}catch(e){}"
 
 
-> core-js-pure@3.15.2 postinstall \node_modules\core-js-pure
+> core-js-pure@3.15.2 postinstall D:\A_TUAN\REACT_JS\CHISFIS\Chisfis\node_modules\core-js-pure
 > node -e "try{require('./postinstall')}catch(e){}"
 
 
-> ejs@2.7.4 postinstall \node_modules\ejs
+> ejs@2.7.4 postinstall D:\A_TUAN\REACT_JS\CHISFIS\Chisfis\node_modules\ejs
 > node ./postinstall.js
 
 Thank you for installing [35mEJS[0m: built with the [32mJake[0m JavaScript build tool ([32mhttps://jakejs.com/[0m)

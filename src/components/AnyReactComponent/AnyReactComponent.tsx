@@ -59,7 +59,7 @@ const AnyReactComponent: FC<AnyReactComponentProps> = ({
             <ExperiencesCard
               size="small"
               data={experiences}
-              className="px-3 pt-3 bg-white shadow-2xl dark:bg-neutral-900 rounded-3xl"
+              className="shadow-2xl bg-white dark:bg-neutral-900 pt-3 px-3 rounded-3xl"
             />
           )}
           {car && <CarCard size="small" data={car} className="shadow-2xl " />}

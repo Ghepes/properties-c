@@ -23,7 +23,7 @@ const PageAddListing10: FC<PageAddListing10Props> = () => {
             to be reviewed for publication
           </span>
         </div>
-        <div className="border-b w-14 border-neutral-200 dark:border-neutral-700"></div>
+        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
         {/* FORM */}
         <div>
           <h3 className="text-lg font-semibold">This is your listing</h3>
@@ -33,11 +33,11 @@ const PageAddListing10: FC<PageAddListing10Props> = () => {
               data={{ ...DEMO_STAY_LISTINGS[0], reviewStart: 0 }}
             />
           </div>
-          <div className="flex items-center mt-8 space-x-5">
+          <div className="flex items-center space-x-5 mt-8">
             <ButtonSecondary href="/add-listing-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-5 h-5"
+                className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -55,7 +55,7 @@ const PageAddListing10: FC<PageAddListing10Props> = () => {
             <ButtonPrimary>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-5 h-5"
+                className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

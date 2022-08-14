@@ -1,13 +1,12 @@
-import{ useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import LocationInput from "./LocationInput";
 import GuestsInput, { GuestsInputProps } from "./GuestsInput";
 import ExperiencesDateSingleInput from "./ExperiencesDateSingleInput";
-import ButtonSubmit from "./ButtonSubmit";
 import moment from "moment";
 import { FC } from "react";
 
 // DEFAULT DATA FOR ARCHIVE PAGE
-const defaultLocationValue = "Tokyo, Jappan";
+const defaultLocationValue = "Mongolia";
 const defaultDate = moment();
 const defaultGuestValue: GuestsInputProps["defaultValue"] = {
   guestAdults: 2,
@@ -41,11 +40,12 @@ const ExperiencesSearchForm: FC<ExperiencesSearchFormProps> = ({
 
   const renderForm = () => {
     return (
-      <form className="relative flex flex-col w-full mt-8 bg-white divide-y shadow-xl md:flex-row rounded-3xl md:rounded-full dark:shadow-2xl dark:bg-neutral-800 divide-neutral-200 dark:divide-neutral-700 md:divide-y-0">
+      <form className="w-full relative mt-8 flex flex-col md:flex-row  rounded-3xl md:rounded-full shadow-xl dark:shadow-2xl bg-white dark:bg-neutral-800 divide-y divide-neutral-200 dark:divide-neutral-700  md:divide-y-0">
         <LocationInput
           defaultValue={locationInputValue}
-          onChange={(e:any) => setLocationInputValue(e)}
+          onChange={(e) => setLocationInputValue(e)}
           onInputDone={() => setDateFocused(true)}
+          className="flex-[1.5]"
         />
 
         <ExperiencesDateSingleInput
@@ -55,16 +55,14 @@ const ExperiencesSearchForm: FC<ExperiencesSearchFormProps> = ({
           onFocusChange={(focus: boolean) => {
             setDateFocused(focus);
           }}
+          className="flex-1"
         />
-
         <GuestsInput
           defaultValue={guestValue}
           onChange={(data) => setGuestValue(data)}
+          className="flex-[1.5]"
+          buttonSubmitHref="/listing-experiences"
         />
-        {/* BUTTON SUBMIT OF FORM */}
-        <div className="flex items-center justify-center px-4 py-4 lg:py-0">
-          <ButtonSubmit />
-        </div>
       </form>
     );
   };

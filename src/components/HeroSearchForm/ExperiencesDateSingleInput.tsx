@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { SingleDatePicker, AnchorDirectionShape } from "react-dates";
 import { FC } from "react";
 import moment from "moment";
 import useWindowSize from "hooks/useWindowResize";
-
+import useNcId from "hooks/useNcId";
+import AuthContext from "context/AuthContext";
 export interface ExperiencesDateSingleInputProps {
   defaultValue: moment.Moment | null;
   onChange?: (date: moment.Moment | null) => void;
@@ -23,8 +24,10 @@ const ExperiencesDateSingleInput: FC<ExperiencesDateSingleInputProps> = ({
   className = "",
   fieldClassName = "[ nc-hero-field-padding ]",
 }) => {
+  const auth: any = useContext(AuthContext);
   const [focusedInput, setFocusedInput] = useState(defaultFocus);
   const [startDate, setStartDate] = useState(defaultValue);
+  const startDateId = useNcId();
 
   const windowSize = useWindowSize();
 
@@ -36,12 +39,6 @@ const ExperiencesDateSingleInput: FC<ExperiencesDateSingleInputProps> = ({
     setFocusedInput(defaultFocus);
   }, [defaultFocus]);
 
-  useEffect(() => {
-    if (onChange) {
-      onChange(startDate);
-    }
-  }, [startDate]);
-
   const handleDateFocusChange = (arg: { focused: boolean }) => {
     setFocusedInput(arg.focused);
     onFocusChange && onFocusChange(arg.focused);
@@ -51,7 +48,7 @@ const ExperiencesDateSingleInput: FC<ExperiencesDateSingleInputProps> = ({
     const focused = focusedInput;
     return (
       <div
-        className={`flex w-full relative ${fieldClassName} items-center space-x-3 cursor-pointer ${
+        className={`flex-1 flex relative ${fieldClassName} items-center space-x-3 cursor-pointer ${
           focused ? "nc-hero-field-focused" : ""
         }`}
       >
@@ -73,10 +70,14 @@ const ExperiencesDateSingleInput: FC<ExperiencesDateSingleInputProps> = ({
         </div>
         <div className="flex-grow">
           <span className="block xl:text-lg font-semibold">
-            {startDate ? startDate.format("DD MMM") : "Date"}
+            {startDate
+              ? startDate.format("DD MMM")
+              : auth.site_data.home.first.date}
           </span>
           <span className="block mt-1 text-sm text-neutral-400 leading-none font-light">
-            {startDate ? "Date" : `Add date`}
+            {startDate
+              ? auth.site_data.home.first.date
+              : auth.site_data.home.first.add_date}
           </span>
         </div>
       </div>
@@ -88,15 +89,17 @@ const ExperiencesDateSingleInput: FC<ExperiencesDateSingleInputProps> = ({
       className={`ExperiencesDateSingleInput relative flex ${className} ${
         !!focusedInput ? "nc-date-focusedInput" : "nc-date-not-focusedInput"
       }`}
-      style={{ flex: "1 0 0%" }}
     >
       <div className="absolute inset-0 flex">
         <SingleDatePicker
           date={startDate}
-          onDateChange={(date) => setStartDate(date)}
-          id={"nc-hero-ExperiencesDateSingleInput-startDateId"}
+          onDateChange={(date) => {
+            setStartDate(date);
+            onChange && onChange(date);
+          }}
+          id={startDateId}
           focused={focusedInput}
-          daySize={windowSize.width > 425 ? 56 : undefined}
+          daySize={windowSize.width > 1279 ? 56 : 44}
           orientation={"horizontal"}
           onFocusChange={handleDateFocusChange}
           noBorder

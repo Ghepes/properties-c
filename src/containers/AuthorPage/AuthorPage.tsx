@@ -24,7 +24,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
 
   const renderSidebar = () => {
     return (
-      <div className="flex flex-col items-center w-full px-0 space-y-6 text-center sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 sm:space-y-7 sm:p-6 xl:p-8">
+      <div className=" w-full flex flex-col items-center text-center sm:rounded-2xl sm:border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-7 px-0 sm:p-6 xl:p-8">
         <Avatar
           hasChecked
           hasCheckedClass="w-6 h-6 -top-0.5 right-2"
@@ -32,7 +32,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
         />
 
         {/* ---- */}
-        <div className="flex flex-col items-center space-y-3 text-center">
+        <div className="space-y-3 text-center flex flex-col items-center">
           <h2 className="text-3xl font-semibold">Kevin Francis</h2>
           <StartRating className="!text-base" />
         </div>
@@ -57,7 +57,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
           <div className="flex items-center space-x-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6 text-neutral-400"
+              className="h-6 w-6 text-neutral-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -76,7 +76,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
           <div className="flex items-center space-x-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6 text-neutral-400"
+              className="h-6 w-6 text-neutral-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -96,7 +96,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
           <div className="flex items-center space-x-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6 text-neutral-400"
+              className="h-6 w-6 text-neutral-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -127,7 +127,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
             more branded.
           </span>
         </div>
-        <div className="border-b w-14 border-neutral-200 dark:border-neutral-700"></div>
+        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
 
         <div>
           <Tab.Group>
@@ -150,34 +150,34 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
             </Tab.List>
             <Tab.Panels>
               <Tab.Panel className="">
-                <div className="grid grid-cols-1 gap-6 mt-8 md:gap-7 sm:grid-cols-2">
+                <div className="mt-8 grid grid-cols-1 gap-6 md:gap-7 sm:grid-cols-2">
                   {DEMO_STAY_LISTINGS.filter((_, i) => i < 4).map((stay) => (
                     <StayCard key={stay.id} data={stay} />
                   ))}
                 </div>
-                <div className="flex items-center justify-center mt-11">
+                <div className="flex mt-11 justify-center items-center">
                   <ButtonSecondary>Show me more</ButtonSecondary>
                 </div>
               </Tab.Panel>
               <Tab.Panel className="">
-                <div className="grid grid-cols-1 gap-6 mt-8 md:gap-7 sm:grid-cols-2">
+                <div className="mt-8 grid grid-cols-1 gap-6 md:gap-7 sm:grid-cols-2">
                   {DEMO_EXPERIENCES_LISTINGS.filter((_, i) => i < 4).map(
                     (stay) => (
                       <ExperiencesCard key={stay.id} data={stay} />
                     )
                   )}
                 </div>
-                <div className="flex items-center justify-center mt-11">
+                <div className="flex mt-11 justify-center items-center">
                   <ButtonSecondary>Show me more</ButtonSecondary>
                 </div>
               </Tab.Panel>
               <Tab.Panel className="">
-                <div className="grid grid-cols-1 gap-6 mt-8 md:gap-7 sm:grid-cols-2">
+                <div className="mt-8 grid grid-cols-1 gap-6 md:gap-7 sm:grid-cols-2">
                   {DEMO_CAR_LISTINGS.filter((_, i) => i < 4).map((stay) => (
                     <CarCard key={stay.id} data={stay} />
                   ))}
                 </div>
-                <div className="flex items-center justify-center mt-11">
+                <div className="flex mt-11 justify-center items-center">
                   <ButtonSecondary>Show me more</ButtonSecondary>
                 </div>
               </Tab.Panel>
@@ -193,7 +193,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
       <div className="listingSection__wrap">
         {/* HEADING */}
         <h2 className="text-2xl font-semibold">Reviews (23 reviews)</h2>
-        <div className="border-b w-14 border-neutral-200 dark:border-neutral-700"></div>
+        <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
 
         {/* comment */}
         <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
@@ -212,13 +212,13 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   return (
     <div className={`nc-AuthorPage ${className}`} data-nc-id="AuthorPage">
       <Helmet>
-        <title>Login</title>
+        <title>Login || Booking React Template</title>
       </Helmet>
-      <main className="container flex flex-col mt-12 mb-24 lg:mb-32 lg:flex-row">
-        <div className="flex-grow block mb-24 lg:mb-0">
+      <main className="container mt-12 mb-24 lg:mb-32 flex flex-col lg:flex-row">
+        <div className="block flex-grow mb-24 lg:mb-0">
           <div className="lg:sticky lg:top-24">{renderSidebar()}</div>
         </div>
-        <div className="flex-shrink-0 w-full space-y-8 lg:w-3/5 xl:w-2/3 lg:space-y-10 lg:pl-10">
+        <div className="w-full lg:w-3/5 xl:w-2/3 space-y-8 lg:space-y-10 lg:pl-10 flex-shrink-0">
           {renderSection1()}
           {renderSection2()}
         </div>

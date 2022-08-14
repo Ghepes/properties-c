@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import LocationInput from "./LocationInput";
 import { FocusedInputShape } from "react-dates";
 import RentalCarDatesRangeInput from "./RentalCarDatesRangeInput";
-import ButtonSubmit from "./ButtonSubmit";
 import { FC } from "react";
 import moment from "moment";
 
@@ -88,58 +87,56 @@ const RentalCarSearchForm: FC<RentalCarSearchFormProps> = ({
 
   const renderForm = () => {
     return (
-        <div className="w-full">
-            <form className="relative w-full mt-8 bg-white shadow-xl rounded-3xl dark:shadow-2xl dark:bg-neutral-800">
-                {renderRadioBtn()}
-                <div className=" flex flex-col md:flex-row w-full rounded-full [ nc-divide-field ] ">
-                    <div className="relative flex flex-col md:flex-row flex-grow [ nc-divide-field ] ">
-                        <LocationInput
-                            defaultValue={pickUpInputValue}
-                            onChange={(e:any) => setPickUpInputValue(e)}
-                            onInputDone={() =>
-                                setFieldFocused(
-                                    dropOffLocationType === "different"
-                                        ? "dropOffInput"
-                                        : "startDate"
-                                )
-                            }
-                            placeHolder="City or Airport"
-                            desc="Pick up location"
-                        />
-                        {dropOffLocationType === "different" && (
-                            <LocationInput
-                                defaultValue={dropOffInputValue}
-                                onChange={(e:any) =>
-                                    setDropOffInputValue(e)
-                                }
-                                onInputDone={() => setFieldFocused("startDate")}
-                                placeHolder="City or Airport"
-                                desc="Drop off location"
-                                autoFocus={fieldFocused === "dropOffInput"}
-                            />
-                        )}
-                    </div>
-                    <RentalCarDatesRangeInput
-                        defaultDateValue={dateRangeValue}
-                        defaultTimeValue={timeRangeValue}
-                        defaultFocus={
-                            fieldFocused === "dropOffInput"
-                                ? null
-                                : fieldFocused
-                        }
-                        onFocusChange={(focus) => setFieldFocused(focus)}
-                        onChange={(data) => {
-                            setDateRangeValue(data.stateDate);
-                            setTimeRangeValue(data.stateTimeRage);
-                        }}
-                    />
-                    {/* BUTTON SUBMIT OF FORM */}
-                    <div className="flex items-center justify-center px-4 py-3">
-                        <ButtonSubmit />
-                    </div>
-                </div>
-            </form>
-        </div>
+      <div className="w-full">
+        <form className="w-full relative mt-8 rounded-[40px] xl:rounded-[49px] rounded-t-2xl xl:rounded-t-3xl shadow-xl dark:shadow-2xl bg-white dark:bg-neutral-800">
+          {renderRadioBtn()}
+          <div className="flex ">
+            <div className="flex-1 relative flex flex-row">
+              <LocationInput
+                defaultValue={pickUpInputValue}
+                onChange={(e) => setPickUpInputValue(e)}
+                onInputDone={() =>
+                  setFieldFocused(
+                    dropOffLocationType === "different"
+                      ? "dropOffInput"
+                      : "startDate"
+                  )
+                }
+                placeHolder="City or Airport"
+                desc="Pick up location"
+                className="flex-1"
+              />
+              {dropOffLocationType === "different" && (
+                <LocationInput
+                  defaultValue={dropOffInputValue}
+                  onChange={(e) => setDropOffInputValue(e)}
+                  onInputDone={() => setFieldFocused("startDate")}
+                  placeHolder="City or Airport"
+                  desc="Drop off location"
+                  autoFocus={fieldFocused === "dropOffInput"}
+                  className="flex-1"
+                />
+              )}
+            </div>
+            <RentalCarDatesRangeInput
+              defaultDateValue={dateRangeValue}
+              defaultTimeValue={timeRangeValue}
+              defaultFocus={
+                fieldFocused === "dropOffInput" ? null : fieldFocused
+              }
+              onFocusChange={(focus) => setFieldFocused(focus)}
+              onChange={(data) => {
+                setDateRangeValue(data.stateDate);
+                setTimeRangeValue(data.stateTimeRage);
+              }}
+              className={` ${
+                dropOffLocationType === "different" ? "flex-1" : "flex-[1.3]"
+              }`}
+              buttonSubmitHref="/listing-car"
+            />
+          </div>
+        </form>
+      </div>
     );
   };
 

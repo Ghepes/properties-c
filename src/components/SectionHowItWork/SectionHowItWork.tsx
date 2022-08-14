@@ -1,11 +1,11 @@
 import Heading from "components/Heading/Heading";
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import NcImage from "shared/NcImage/NcImage";
-import HIW1img from "./Data processing _Monochromatic.svg";
-import HIW2img from "./Analyzing process_Two Color.svg";
-import HIW3img from "./Quality Check_Outline.svg";
+import HIW1img from "images/HIW1.png";
+import HIW2img from "images/HIW2.png";
+import HIW3img from "images/HIW3.png";
 import VectorImg from "images/VectorHIW.svg";
-
+import AuthContext from "context/AuthContext";
 export interface SectionHowItWorkProps {
   className?: string;
   data?: {
@@ -21,38 +21,61 @@ const DEMO_DATA: SectionHowItWorkProps["data"] = [
   {
     id: 1,
     img: HIW1img,
-    title: "Agilidad",
-    desc: "Nuestro proceso es agil para brindar una experiencia más rápida y segura.",
+    title: "Book & relax",
+    desc: "Let each trip be an inspirational journey, each room a peaceful space",
   },
   {
     id: 2,
     img: HIW2img,
-    title: "Facilidad",
-    desc: "Todo en un solo sitio de forma intuitiva y al alcance",
+    title: "Smart checklist",
+    desc: "Let each trip be an inspirational journey, each room a peaceful space",
   },
   {
     id: 3,
     img: HIW3img,
-    title: "Calidad",
-    desc: "Nos centramos en la satisfaccion de nuestros clientes",
+    title: "Save more",
+    desc: "Let each trip be an inspirational journey, each room a peaceful space",
   },
 ];
-
+const DEMO_DATA2: SectionHowItWorkProps["data"] = [
+  {
+    id: 1,
+    img: HIW1img,
+    title: "Захиалах",
+    desc: "Та өөрт төөрсан аялалыг сонгож захиалах",
+  },
+  {
+    id: 2,
+    img: HIW2img,
+    title: "Баталгаажуулах",
+    desc: "Урьдчилгаа хийсэнээр баталгаажин",
+  },
+  {
+    id: 3,
+    img: HIW3img,
+    title: "Аялах",
+    desc: "Аялал эхлэх ",
+  },
+];
 const SectionHowItWork: FC<SectionHowItWorkProps> = ({
   className = "",
-  data = DEMO_DATA,
+  data = DEMO_DATA2,
 }) => {
+  const auth: any = useContext(AuthContext);
+  if (auth.lang == "en") {
+    data = DEMO_DATA;
+  }
   return (
     <div
       className={`nc-SectionHowItWork  ${className}`}
       data-nc-id="SectionHowItWork"
     >
-      <Heading isCenter desc="Nuestro proceso nos ayuda a innovar cada dia más">
-        Nos destaca
+      <Heading isCenter desc={auth.site_data.How_it_work_desc}>
+        {auth.site_data.How_it_work}
       </Heading>
-      <div className="relative grid gap-20 mt-20 md:grid-cols-3">
+      <div className="mt-20 relative grid md:grid-cols-3 gap-20">
         <img
-          className="absolute inset-x-0 hidden md:block top-10"
+          className="hidden md:block absolute inset-x-0 top-10"
           src={VectorImg}
           alt=""
         />
@@ -78,7 +101,7 @@ const SectionHowItWork: FC<SectionHowItWorkProps> = ({
                 src={item.img}
               />
             )}
-            <div className="mt-auto text-center">
+            <div className="text-center mt-auto">
               <h3 className="text-xl font-semibold">{item.title}</h3>
               <span className="block mt-5 text-neutral-500 dark:text-neutral-400">
                 {item.desc}

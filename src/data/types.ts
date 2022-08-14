@@ -7,17 +7,15 @@ export interface CustomLink {
 
 //  ##########  PostDataType ######## //
 export interface TaxonomyType {
-    id: string | number;
-    name: string;
-    href: string;
-    count?: number;
-    thumbnail?: string;
-    desc?: string;
-    color?: TwMainColor | string;
-    taxonomy: "category" | "tag";
-    listingType?: "stay" | "experiences" | "car";
-    countSell?: number;
-    countRent?: number;
+  id: string | number;
+  name: string;
+  href: string;
+  count?: number;
+  thumbnail?: string;
+  desc?: string;
+  color?: TwMainColor | string;
+  taxonomy: "category" | "tag";
+  listingType?: "stay" | "experiences" | "car";
 }
 
 export interface AuthorType {
@@ -64,32 +62,6 @@ export type TwMainColor =
 export interface StayDataType {
   id: string | number;
   author: AuthorType;
-  date: string;
-  href: string;
-  title: string;
-  featuredImage: string;
-  commentCount: number;
-  viewCount: number;
-  address: string;
-  reviewStart: number;
-  reviewCount: number;
-  like: boolean;
-  galleryImgs: string[];
-  price: string;
-  listingCategory: TaxonomyType;
-  maxGuests: number;
-  bedrooms: number;
-  bathrooms: number;
-  saleOff?: string | null;
-  isAds: boolean | null;
-  map: {
-    lat: number;
-    lng: number;
-  };
-}
-
-export interface PropertyDataType {
-  idProperty: string | number;
   date: string;
   href: string;
   title: string;

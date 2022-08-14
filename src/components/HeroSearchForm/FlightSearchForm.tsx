@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import LocationInput from "./LocationInput";
 import { FocusedInputShape } from "react-dates";
 import RentalCarDatesRangeInput from "./RentalCarDatesRangeInput";
-import ButtonSubmit from "./ButtonSubmit";
 import { FC } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
@@ -82,12 +81,13 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({ haveDefaultValue }) => {
     return (
       <div className="">
         <Popover className="relative">
-          {({ open }) => (
+          {({ open }: any) => (
             <>
               <Popover.Button
                 className={`
            ${open ? "" : ""}
             px-4 py-1.5 rounded-md inline-flex items-center font-medium hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 text-xs`}
+                onClick={() => document.querySelector("html")?.click()}
               >
                 <span>{`${guests} Guest`}</span>
                 <ChevronDownIcon
@@ -107,8 +107,8 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({ haveDefaultValue }) => {
                 leaveTo="opacity-0 translate-y-1"
               >
                 <Popover.Panel className="absolute z-10 px-4 mt-3 transform -translate-x-1/2 left-1/2 sm:px-0 ">
-                  <div className="overflow-hidden shadow-lg rounded-2xl ring-1 ring-black/5 dark:ring-white/10">
-                    <div className="relative p-4 bg-white dark:bg-neutral-800">
+                  <div className="overflow-hidden rounded-2xl shadow-lg ring-1 ring-black/5 dark:ring-white/10">
+                    <div className="relative bg-white dark:bg-neutral-800 p-4">
                       <NcInputNumber
                         onChange={(e) => setGuests(e)}
                         min={1}
@@ -130,12 +130,13 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({ haveDefaultValue }) => {
     return (
       <div className="">
         <Popover className="relative">
-          {({ open, close }) => (
+          {({ open, close }: any) => (
             <>
               <Popover.Button
                 className={`
            ${open ? "" : ""}
             px-4 py-1.5 rounded-md inline-flex items-center font-medium hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 text-xs`}
+                onClick={() => document.querySelector("html")?.click()}
               >
                 <span>{`${flightClassState}`}</span>
                 <ChevronDownIcon
@@ -155,7 +156,7 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({ haveDefaultValue }) => {
                 leaveTo="opacity-0 translate-y-1"
               >
                 <Popover.Panel className="absolute z-10 w-screen max-w-[200px] sm:max-w-[220px] px-4 mt-3 transform -translate-x-1/2 left-1/2 sm:px-0 ">
-                  <div className="overflow-hidden shadow-lg rounded-2xl ring-1 ring-black/5 dark:ring-white/10 ">
+                  <div className="overflow-hidden rounded-2xl shadow-lg ring-1 ring-black/5 dark:ring-white/10 ">
                     <div className="relative grid gap-8 bg-white dark:bg-neutral-800 p-7 ">
                       {flightClass.map((item) => (
                         <a
@@ -205,10 +206,10 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({ haveDefaultValue }) => {
         >
           One-way
         </div>
-        <div className="my-1 mr-2 border rounded-full sm:mr-4 border-neutral-300 dark:border-neutral-700">
+        <div className=" mr-2 my-1 sm:mr-4 border border-neutral-300 dark:border-neutral-700 rounded-full">
           {renderSelectClass()}
         </div>
-        <div className="my-1 border rounded-full border-neutral-300 dark:border-neutral-700">
+        <div className="my-1 border border-neutral-300 dark:border-neutral-700 rounded-full">
           {renderGuest()}
         </div>
       </div>
@@ -218,20 +219,20 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({ haveDefaultValue }) => {
   const renderForm = () => {
     return (
       <div className="w-full">
-        <form className="relative w-full mt-8 bg-white shadow-xl rounded-3xl dark:shadow-2xl dark:bg-neutral-800">
+        <form className="w-full relative mt-8 rounded-[40px] xl:rounded-[49px] rounded-t-2xl xl:rounded-t-3xl shadow-xl dark:shadow-2xl bg-white dark:bg-neutral-800">
           {renderRadioBtn()}
-          <div className=" flex flex-col md:flex-row w-full rounded-full [ nc-divide-field ] ">
-            <div className="relative flex flex-col md:flex-row flex-grow [ nc-divide-field ] ">
+          <div className="flex flex-1 rounded-full">
+            <div className="relative flex flex-1">
               <LocationInput
                 defaultValue={pickUpInputValue}
-                onChange={(e:any) => setPickUpInputValue(e)}
+                onChange={(e) => setPickUpInputValue(e)}
                 onInputDone={() => setFieldFocused("dropOffInput")}
                 placeHolder="Flying from"
                 desc="Where do you want to fly from?"
               />
               <LocationInput
                 defaultValue={dropOffInputValue}
-                onChange={(e:any) => setDropOffInputValue(e)}
+                onChange={(e) => setDropOffInputValue(e)}
                 onInputDone={() => setFieldFocused("startDate")}
                 placeHolder="Flying to"
                 desc="Where you want to fly to?"
@@ -249,11 +250,9 @@ const FlightSearchForm: FC<FlightSearchFormProps> = ({ haveDefaultValue }) => {
                 setDateRangeValue(data.stateDate);
                 setTimeRangeValue(data.stateTimeRage);
               }}
+              className="flex-1"
+              buttonSubmitHref="/listing-flights"
             />
-            {/* BUTTON SUBMIT OF FORM */}
-            <div className="flex items-center justify-center px-4 py-3">
-              <ButtonSubmit />
-            </div>
           </div>
         </form>
       </div>

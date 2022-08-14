@@ -1,6 +1,6 @@
 import { avatarColors } from "contains/contants";
 import React, { FC } from "react";
-import avatar1 from "images/avatars/defaultAvatar.png";
+import avatar1 from "images/avatars/Image-1.png";
 
 export interface AvatarProps {
   containerClassName?: string;
@@ -38,7 +38,7 @@ const Avatar: FC<AvatarProps> = ({
       {url && (
         <img
           className={`absolute inset-0 w-full h-full object-cover ${radius}`}
-          src={url}
+          src={`${process.env.REACT_APP_CDN_URL}${url}`}
           alt={name}
         />
       )}

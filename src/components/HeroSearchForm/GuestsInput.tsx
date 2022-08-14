@@ -1,24 +1,30 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useContext } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import NcInputNumber from "components/NcInputNumber/NcInputNumber";
 import { FC } from "react";
 import ClearDataButton from "./ClearDataButton";
-
+import ButtonSubmit from "./ButtonSubmit";
+import { GuestsObject } from "components/HeroSearchForm2Mobile/GuestsInput";
+import { PathName } from "routers/types";
+import AuthContext from "context/AuthContext";
 export interface GuestsInputProps {
-  defaultValue: {
-    guestAdults?: number;
-    guestChildren?: number;
-    guestInfants?: number;
-  };
-  onChange?: (data: GuestsInputProps["defaultValue"]) => void;
+  defaultValue: GuestsObject;
+  onChange?: (data: GuestsObject) => void;
   fieldClassName?: string;
+  className?: string;
+  buttonSubmitHref?: PathName;
+  hasButtonSubmit?: boolean;
 }
 
 const GuestsInput: FC<GuestsInputProps> = ({
   defaultValue,
   onChange,
   fieldClassName = "[ nc-hero-field-padding ]",
+  className = "[ nc-flex-1 ]",
+  buttonSubmitHref = "/listing-stay-map",
+  hasButtonSubmit = true,
 }) => {
+  const auth: any = useContext(AuthContext);
   const [guestAdultsInputValue, setGuestAdultsInputValue] = useState(
     defaultValue.guestAdults || 0
   );
@@ -35,51 +41,72 @@ const GuestsInput: FC<GuestsInputProps> = ({
     setGuestInfantsInputValue(defaultValue.guestInfants || 0);
   }, [defaultValue]);
 
-  useEffect(() => {
-    if (onChange) {
-      onChange({
-        guestAdults: guestAdultsInputValue,
-        guestChildren: guestChildrenInputValue,
-        guestInfants: guestInfantsInputValue,
-      });
+  const handleChangeData = (value: number, type: keyof GuestsObject) => {
+    let newValue = {
+      guestAdults: guestAdultsInputValue,
+      guestChildren: guestChildrenInputValue,
+      guestInfants: guestInfantsInputValue,
+    };
+    if (type === "guestAdults") {
+      setGuestAdultsInputValue(value);
+      newValue.guestAdults = value;
     }
-  }, [guestAdultsInputValue, guestChildrenInputValue, guestInfantsInputValue]);
+    if (type === "guestChildren") {
+      setGuestChildrenInputValue(value);
+      newValue.guestChildren = value;
+    }
+    if (type === "guestInfants") {
+      setGuestInfantsInputValue(value);
+      newValue.guestInfants = value;
+    }
+    onChange && onChange(newValue);
+  };
 
   const totalGuests =
     guestChildrenInputValue + guestAdultsInputValue + guestInfantsInputValue;
 
   return (
-    <Popover className="flex relative [ nc-flex-1 ]">
-      {({ open }) => (
+    <Popover className={`flex relative ${className}`}>
+      {({ open }: any) => (
         <>
-          <Popover.Button
-            className={`flex text-left w-full flex-shrink-0 items-center ${fieldClassName} space-x-3 focus:outline-none cursor-pointer ${
+          <div
+            className={`flex-1 flex items-center focus:outline-none cursor-pointer ${
               open ? "nc-hero-field-focused" : ""
             }`}
           >
-            <div className="text-neutral-300 dark:text-neutral-400">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="nc-icon-field"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
-                />
-              </svg>
-            </div>
-            <div className="flex-grow">
-              <span className="block xl:text-lg font-semibold">
-                {totalGuests || ""} Guests
-              </span>
-              <span className="block mt-1 text-sm text-neutral-400 leading-none font-light">
-                {totalGuests ? "Guests" : "Add guests"}
-              </span>
+            <Popover.Button
+              className={`flex-1 flex text-left items-center ${fieldClassName} space-x-3 `}
+              onClick={() => document.querySelector("html")?.click()}
+            >
+              <div className="text-neutral-300 dark:text-neutral-400">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="nc-icon-field"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
+                  />
+                </svg>
+              </div>
+              <div className="flex-grow">
+                <span className="block xl:text-lg font-semibold">
+                  {totalGuests || ""} {auth.site_data.guests}
+                </span>
+                <span className="block mt-1 text-sm text-neutral-400 leading-none font-light">
+                  {totalGuests
+                    ? auth.site_data.guests
+                    : auth.site_data.add_guests}
+                </span>
+              </div>
+            </Popover.Button>
+
+            <div className="relative">
               {!!totalGuests && open && (
                 <ClearDataButton
                   onClick={() => {
@@ -90,7 +117,14 @@ const GuestsInput: FC<GuestsInputProps> = ({
                 />
               )}
             </div>
-          </Popover.Button>
+
+            {/* BUTTON SUBMIT OF FORM */}
+            {hasButtonSubmit && (
+              <div className="pr-2 xl:pr-4">
+                <ButtonSubmit href={auth.site_data.home_search_button_href} />
+              </div>
+            )}
+          </div>
           <Transition
             as={Fragment}
             enter="transition ease-out duration-200"
@@ -104,28 +138,28 @@ const GuestsInput: FC<GuestsInputProps> = ({
               <NcInputNumber
                 className="w-full"
                 defaultValue={guestAdultsInputValue}
-                onChange={(value) => setGuestAdultsInputValue(value)}
+                onChange={(value) => handleChangeData(value, "guestAdults")}
                 max={10}
                 min={1}
-                label="Adults"
-                desc="Ages 13 or above"
+                label={auth.site_data.Adults}
+                desc={auth.site_data.Adults_age}
               />
               <NcInputNumber
                 className="w-full mt-6"
                 defaultValue={guestChildrenInputValue}
-                onChange={(value) => setGuestChildrenInputValue(value)}
+                onChange={(value) => handleChangeData(value, "guestChildren")}
                 max={4}
-                label="Children"
-                desc="Ages 2–12"
+                label={auth.site_data.Children}
+                desc={auth.site_data.Children_age}
               />
 
               <NcInputNumber
                 className="w-full mt-6"
                 defaultValue={guestInfantsInputValue}
-                onChange={(value) => setGuestInfantsInputValue(value)}
+                onChange={(value) => handleChangeData(value, "guestInfants")}
                 max={4}
-                label="Infants"
-                desc="Ages 0–2"
+                label={auth.site_data.Infants}
+                desc={auth.site_data.Infants_age}
               />
             </Popover.Panel>
           </Transition>

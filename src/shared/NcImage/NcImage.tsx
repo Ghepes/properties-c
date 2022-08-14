@@ -19,14 +19,19 @@ const NcImage: FC<NcImageProps> = ({
   className = "object-cover w-full h-full",
   ...args
 }) => {
+  if (!src.includes("http")) {
+    if (src.includes("holidays")) {
+      src = `${process.env.REACT_APP_CDN_URL}${src}`;
+    }
+  }
   let isMounted = false;
   const _containerRef = useRef(null);
   let _imageEl: HTMLImageElement | null = null;
   // const darkmodeState = useAppSelector(selectDarkmodeState);
-  
+
   const [__src, set__src] = useState("");
   const [imageLoaded, setImageLoaded] = useState(false);
-  
+
   const _initActions = async () => {
     // set__src(placeholderImage);
     _checkInViewPort();
@@ -35,7 +40,7 @@ const NcImage: FC<NcImageProps> = ({
   const _checkInViewPort = () => {
     if (!_containerRef.current) return;
     checkInViewIntersectionObserver({
-      target: _containerRef.current as any,
+      target: _containerRef.current,
       options: {
         root: null,
         rootMargin: "0%",
@@ -87,7 +92,7 @@ const NcImage: FC<NcImageProps> = ({
 
   return (
     <div
-      className={`nc-NcImage ${containerClassName} `}
+      className={`nc-NcImage ${containerClassName}`}
       data-nc-id="NcImage"
       ref={_containerRef}
     >
