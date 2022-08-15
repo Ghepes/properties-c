@@ -85,7 +85,7 @@ const SectionGridHasMap: FC<SectionGridHasMapProps> = () => {
 
             <GoogleMapReact
               bootstrapURLKeys={{
-                key: "AIzaSyAGVJfZMAKYfZ71nzL_v5i3LjTTWnCYwTY",
+                key: "AIzaSyBY6phU1oCM3aiilBiaWqnbjGaExfmF3_c",
               }}
               yesIWantToUseGoogleMapApiInternals
               defaultZoom={12}

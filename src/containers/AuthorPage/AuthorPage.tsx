@@ -33,7 +33,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
 
         {/* ---- */}
         <div className="space-y-3 text-center flex flex-col items-center">
-          <h2 className="text-3xl font-semibold">Kevin Francis</h2>
+          <h2 className="text-3xl font-semibold">Simiyoo Identity slr</h2>
           <StartRating className="!text-base" />
         </div>
 
@@ -70,7 +70,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
               />
             </svg>
             <span className="text-neutral-6000 dark:text-neutral-300">
-              Ha Noi, Viet Nam
+              Vienna, Austria
             </span>
           </div>
           <div className="flex items-center space-x-4">
@@ -121,9 +121,9 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
     return (
       <div className="listingSection__wrap">
         <div>
-          <h2 className="text-2xl font-semibold">Kevin Francis's listings</h2>
+          <h2 className="text-2xl font-semibold">Simiyoo Identity slr's listings</h2>
           <span className="block mt-2 text-neutral-500 dark:text-neutral-400">
-            Kevin Francis's listings is very rich, 5 star reviews help him to be
+            Simiyoo Identity slr's listings is very rich, 5 star reviews help him to be
             more branded.
           </span>
         </div>
@@ -212,7 +212,7 @@ const AuthorPage: FC<AuthorPageProps> = ({ className = "" }) => {
   return (
     <div className={`nc-AuthorPage ${className}`} data-nc-id="AuthorPage">
       <Helmet>
-        <title>Login || Booking React Template</title>
+        <title>Login || Booking</title>
       </Helmet>
       <main className="container mt-12 mb-24 lg:mb-32 flex flex-col lg:flex-row">
         <div className="block flex-grow mb-24 lg:mb-0">

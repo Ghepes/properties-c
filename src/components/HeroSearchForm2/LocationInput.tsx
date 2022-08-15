@@ -107,7 +107,7 @@ const LocationInput: FC<LocationInputProps> = ({
     return (
       <>
         {[
-          "Ha Noi, Viet Nam",
+          "Vienna, Austria",
           "San Diego, CA",
           "Humboldt Park, Chicago, IL",
           "Bangor, Northern Ireland",

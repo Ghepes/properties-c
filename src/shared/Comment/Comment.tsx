@@ -18,11 +18,11 @@ const Comment: FC<CommentProps> = ({ isSmall }) => {
             className="flex-shrink-0 font-semibold text-neutral-800 dark:text-neutral-100"
             href="/ncmaz/author/the-demo-author-slug"
           >
-            Foulcher Nathanil
+            Nicol Nath
           </a>
           <span className="mx-2">·</span>
           <span className="text-neutral-500 dark:text-neutral-400 text-xs line-clamp-1 sm:text-sm">
-            May 20, 2021
+            May 20, 2022
           </span>
         </div>
         <span className="block text-neutral-700 mt-2 mb-3 sm:mt-3 sm:mb-4 dark:text-neutral-300">

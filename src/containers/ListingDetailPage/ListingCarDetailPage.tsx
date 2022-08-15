@@ -148,7 +148,7 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
           <span className="ml-2.5 text-neutral-500 dark:text-neutral-400">
             Car owner{" "}
             <span className="text-neutral-900 dark:text-neutral-200 font-medium">
-              Kevin Francis
+              Simiyoo Identity slr
             </span>
           </span>
         </div>
@@ -329,7 +329,7 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
           />
           <div>
             <a className="block text-xl font-medium" href="##">
-              Kevin Francis
+              Simiyoo Identity slr
             </a>
             <div className="mt-1.5 flex items-center text-sm text-neutral-500 dark:text-neutral-400">
               <StartRating />
@@ -458,7 +458,7 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
         <div>
           <h2 className="text-2xl font-semibold">Location</h2>
           <span className="block mt-2 text-neutral-500 dark:text-neutral-400">
-            San Diego, CA, United States of America (SAN-San Diego Intl.)
+            United States of America (SAN-San Diego Intl.)
           </span>
         </div>
         <div className="w-14 border-b border-neutral-200 dark:border-neutral-700" />
@@ -468,13 +468,13 @@ const ListingCarDetailPage: FC<ListingCarDetailPageProps> = ({
           <div className="rounded-xl overflow-hidden">
             <GoogleMapReact
               bootstrapURLKeys={{
-                key: "AIzaSyAGVJfZMAKYfZ71nzL_v5i3LjTTWnCYwTY",
+                key: "AIzaSyBY6phU1oCM3aiilBiaWqnbjGaExfmF3_c",
               }}
               yesIWantToUseGoogleMapApiInternals
               defaultZoom={15}
               defaultCenter={{
-                lat: 55.9607277,
-                lng: 36.2172614,
+                lat: 59.0653912,
+                lng: 48.2053563,
               }}
             >
               <LocationMarker lat={55.9607277} lng={36.2172614} />

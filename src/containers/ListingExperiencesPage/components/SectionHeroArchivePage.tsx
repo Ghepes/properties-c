@@ -34,7 +34,7 @@ const SectionHeroArchivePage: FC<SectionHeroArchivePageProps> = ({
           </h2>
           <div className="flex items-center text-base md:text-lg text-neutral-500 dark:text-neutral-400">
             <i className="text-2xl las la-map-marked"></i>
-            <span className="ml-2.5">{data.country || "Mongolia"} </span>
+            <span className="ml-2.5">{data.country || "Studio Wromo"} </span>
             <span className="mx-5"></span>
             {listingType ? (
               listingType
