@@ -459,8 +459,8 @@ const ListingExperiencesDetailPage: FC<ListingExperiencesDetailPageProps> = ({
           <div>
             <h4 className="text-lg font-semibold">Зочинд тавигдах шаардлага</h4>
             <span className="block mt-3 text-neutral-500 dark:text-neutral-400">
-              4 ба түүнээс дээш насны 10 хүртэлх зочид оролцох боломжтой. Мөн
-              эцэг эхчүүд 2-оос доош насны хүүхдүүдийг авчирч болно.
+              Up to 10 guests ages 4 and up can attend. And
+               Parents can bring children under 2 years old.
             </span>
           </div>
           <div className="w-14 border-b border-neutral-200 dark:border-neutral-700" />
