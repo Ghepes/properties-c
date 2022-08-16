@@ -73,3 +73,4 @@ export interface Page {
   exact?: boolean;
   component: ComponentType<Object>;
 }
+
