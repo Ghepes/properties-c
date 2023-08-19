@@ -25,7 +25,7 @@ const NavMobile: React.FC<NavMobileProps> = ({
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
-      const api_menu_1 = await axios.get(`/graphql/menu`);
+      const api_menu_1 = await axios.get(`/fun/menu`);
       setData(api_menu_1.data.data.first_language);
       setData2(api_menu_1.data.data.second_language);
       setLoading(false);
